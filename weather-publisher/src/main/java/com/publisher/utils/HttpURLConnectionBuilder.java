@@ -1,12 +1,9 @@
-package com.weatherapplication.demo.utils;
+package com.publisher.utils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.function.Consumer;
 
 public class HttpURLConnectionBuilder {
     private HttpURLConnection httpURLConnection;

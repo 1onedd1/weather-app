@@ -1,4 +1,4 @@
-package com.weatherapplication.demo.model;
+package com.publisher.model;
 
 public class WeatherModel {
     private Weather weather[];
