@@ -47,22 +47,4 @@ public class HttpURLConnectionBuilder {
     public HttpURLConnection build() {
         return httpURLConnection;
     }
-
-    public void ifConnectionSuccessfulThen(Consumer<String> consumer) {
-        try {
-            if (httpURLConnection.getResponseCode() != 200) return;
-
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
-            StringBuilder stringBuilder = new StringBuilder();
-            String output;
-            while ((output = bufferedReader.readLine()) != null) {
-                stringBuilder.append(output);
-            }
-            httpURLConnection.disconnect();
-
-            consumer.accept(stringBuilder.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

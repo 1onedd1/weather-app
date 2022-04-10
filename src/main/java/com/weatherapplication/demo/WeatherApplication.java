@@ -31,12 +31,11 @@ public class WeatherApplication {
         String key = "";
 
         try (FileInputStream fileInputStream = new FileInputStream(filePropertyPath)) {
+
             Properties properties = new Properties();
             properties.load(fileInputStream);
-            System.out.println(fileInputStream);
             key = properties.getProperty("key");
 
-            System.out.println(key);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,7 +43,6 @@ public class WeatherApplication {
         String city = "kiev";
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + key;
 
-        System.out.println(key);
         HttpURLConnection connection = HttpURLConnectionBuilder.builder()
                 .setURL(url)
                 .setMethod("GET")
