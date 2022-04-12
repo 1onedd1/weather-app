@@ -1,15 +1,7 @@
 package com.subscriber;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class SubscriberController {
     @FXML private TextField fTemperature;

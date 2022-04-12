@@ -11,20 +11,16 @@ import javafx.stage.Stage;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.io.*;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class Publisher extends Application {
-    private static String broker = "tcp://broker.mqtt-dashboard.com:1883";
-    private static String clientId = "JavaSample";
     private static String filePropertyPath = "weather-publisher/src/main/resources/com/publisher/config.properties";
 
     @Override
@@ -32,7 +28,7 @@ public class Publisher extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Publisher.class.getResource("FXMLView.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Weather Publisher");
-        stage.setScene(scene);
+//        stage.setScene(scene);
         stage.show();
     }
 
@@ -41,23 +37,21 @@ public class Publisher extends Application {
         Properties properties = new Properties();
         properties.load(fileInputStream);
 
-        String key = properties.getProperty("key");
+        String broker = properties.getProperty("mqtt.broker");
+        String clientId = properties.getProperty("mqtt.clientId");
+        String key = properties.getProperty("url.key");
         String city = properties.getProperty("url.city");
         String url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + key;
 
         new Timer().schedule(new TimerTask() {
             public void run() {
+                String json = "";
+
                 HttpURLConnection connection = HttpURLConnectionBuilder.builder()
                         .setURL(url)
                         .setMethod("GET")
                         .setRequestProperty("Accept", "application/json").build();
-
-                String json = "";
-                try {
-                    json = getJsonResponse(connection);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                json = getJsonResponse(connection);
 
                 WeatherModel weatherModel = new Gson().fromJson(json, WeatherModel.class);
 
@@ -67,9 +61,9 @@ public class Publisher extends Application {
                         new Message("/weather/humidity/", String.valueOf(weatherModel.getMain().getHumidity())),
                         new Message("/weather/speedWild/", String.valueOf(weatherModel.getWind().getSpeed()))
                 );
+
                 int qos = 2;
-                messageList.stream().forEach(message -> {
-                    System.out.println(message.getTopic());
+                messageList.forEach(message -> {
                     try {
                         MqttClient publisher = new MqttClient(broker, clientId);
                         MqttConnectOptions connectOptions = new MqttConnectOptions();
@@ -88,20 +82,28 @@ public class Publisher extends Application {
         launch();
     }
 
-    public static String getJsonResponse(HttpURLConnection connection) throws IOException {
+    public static String getJsonResponse(HttpURLConnection connection) {
         String output = "";
 
-        int code = connection.getResponseCode();
+        int code = 0;
+        try {
+            code = connection.getResponseCode();
+            if (code != 200) throw new ConnectException("code: " + code);
 
-        if (code != 200) throw new ConnectException("code: " + code);
+            InputStream inputStream = connection.getInputStream();
+            InputStreamReader streamReader = new InputStreamReader(inputStream);
+            BufferedReader bufferedReader = new BufferedReader(streamReader);
+            StringBuilder stringBuilder = new StringBuilder();
 
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        StringBuilder stringBuilder = new StringBuilder();
-        while ((output = bufferedReader.readLine()) != null) {
-            stringBuilder.append(output);
+            while ((output = bufferedReader.readLine()) != null) {
+                stringBuilder.append(output);
+            }
+
+            output = stringBuilder.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        output = stringBuilder.toString();
         connection.disconnect();
 
         return output;

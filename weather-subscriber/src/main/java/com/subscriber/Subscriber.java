@@ -1,17 +1,14 @@
 package com.subscriber;
 
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.List;
 import java.util.Properties;
 
 public class Subscriber extends Application {
@@ -30,7 +27,7 @@ public class Subscriber extends Application {
 
         MqttClient subscriber = new MqttClient(broker, clientId);
         subscriber.connect();
-        subscriber.setCallback(new Test());
+        subscriber.setCallback(new SubscribeHandler());
 
         String[] topics = {
                 "/weather/temperature/",
