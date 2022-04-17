@@ -14,10 +14,13 @@
         <TextField text="0" maxWidth="80" editable="false" focusTraversable="false" GridPane.columnIndex="1"
                    GridPane.rowIndex="0"/>
         <Label fx:id="pressure" text="Pressure" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <TextField text="0" maxWidth="80" editable="false" focusTraversable="false" GridPane.columnIndex="1"
+        <TextField fx:id="fPressure" text="0" maxWidth="80" editable="false" focusTraversable="false" GridPane.columnIndex="1"
                    GridPane.rowIndex="1"/>
         <Label fx:id="speedWild" text="Speed Wild" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
         <TextField text="0" maxWidth="80" editable="false" focusTraversable="false" GridPane.columnIndex="1"
                    GridPane.rowIndex="2"/>
+
+        <Label fx:id="lamp" text="false" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Button GridPane.columnIndex="0" GridPane.rowIndex="3" onAction="#onClick" text="Lamp" />
     </GridPane>
 </VBox>

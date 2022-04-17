@@ -22,6 +22,9 @@
         <Label text="Humidity" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
         <TextField fx:id="fHumidity" text="0" maxWidth="80" editable="false" focusTraversable="false"
                    GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+        <Label text="Lamp" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <TextField fx:id="fLamp" text="Disabled" maxWidth="80" editable="false" focusTraversable="false"
+                   GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
     </GridPane>
 </VBox>

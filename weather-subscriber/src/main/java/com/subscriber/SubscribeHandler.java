@@ -1,6 +1,7 @@
 package com.subscriber;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Window;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -26,7 +27,10 @@ public class SubscribeHandler implements MqttCallback {
             case "/weather/pressure/" -> ((TextField) scene.lookup("#fPressure")).setText(mqttMessage.toString());
             case "/weather/speedWild/" -> ((TextField) scene.lookup("#fSpeedWild")).setText(mqttMessage.toString());
             case "/weather/humidity/" -> ((TextField) scene.lookup("#fHumidity")).setText(mqttMessage.toString());
-
+            case "/weather/lamp/" -> {
+                TextField lamp = (TextField) scene.lookup("#fLamp");
+                lamp.setText(Boolean.parseBoolean(mqttMessage.toString()) ? "Enabled" : "Disabled");
+            }
         }
     }
 
