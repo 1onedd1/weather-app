@@ -11,12 +11,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class Subscriber extends Application {
+public class WeatherSubscriber extends Application {
     private static String filePropertyPath = "weather-subscriber/src/main/resources/com/subscriber/config.properties";
 
     @Override
     public void start(Stage stage) throws IOException, MqttException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Subscriber.class.getResource("FXMLView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(WeatherSubscriber.class.getResource("FXMLView.fxml"));
 
         FileInputStream fileInputStream = new FileInputStream(filePropertyPath);
         Properties properties = new Properties();
@@ -33,7 +33,8 @@ public class Subscriber extends Application {
                 "/weather/temperature/",
                 "/weather/pressure/",
                 "/weather/humidity/",
-                "/weather/speedWild/"
+                "/weather/speedWild/",
+                "/weather/lamp/"
         };
 
         subscriber.subscribe(topics);
