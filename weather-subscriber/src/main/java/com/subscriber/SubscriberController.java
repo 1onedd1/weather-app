@@ -1,7 +1,6 @@
 package com.subscriber;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class SubscriberController {

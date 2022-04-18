@@ -1,7 +1,6 @@
 package com.subscriber;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Window;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
