@@ -30,7 +30,7 @@ public class PublisherController {
         try {
             Publisher publisher = new Publisher("tcp://broker.mqtt-dashboard.com:1883", "client");
             activeLamp = !activeLamp;
-            Message message = new Message("/weather/lamp/", String.valueOf(activeLamp), 2);
+            Message message = new Message("/weather/lamp/", activeLamp ? "1" : "0", 2);
             lamp.setText(Boolean.toString(activeLamp));
             publisher.publish(message.getTopic(), message);
             publisher.disconnect();

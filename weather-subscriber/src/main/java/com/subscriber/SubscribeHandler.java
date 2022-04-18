@@ -29,7 +29,7 @@ public class SubscribeHandler implements MqttCallback {
             case "/weather/humidity/" -> ((TextField) scene.lookup("#fHumidity")).setText(mqttMessage.toString());
             case "/weather/lamp/" -> {
                 TextField lamp = (TextField) scene.lookup("#fLamp");
-                lamp.setText(Boolean.parseBoolean(mqttMessage.toString()) ? "Enabled" : "Disabled");
+                lamp.setText(Integer.parseInt(mqttMessage.toString()) == 1 ? "Enabled" : "Disabled");
             }
         }
     }
