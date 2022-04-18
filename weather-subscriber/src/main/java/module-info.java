@@ -4,6 +4,7 @@ module com.subscriber.weathersubscriber {
     requires org.eclipse.paho.client.mqttv3;
 
     exports com.subscriber;
+    exports com.subscriber.view;
 
     opens com.subscriber to javafx.fxml;
 }

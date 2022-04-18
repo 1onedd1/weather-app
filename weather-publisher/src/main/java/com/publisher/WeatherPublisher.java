@@ -4,31 +4,18 @@ import com.google.gson.Gson;
 import com.publisher.model.Message;
 import com.publisher.model.WeatherModel;
 import com.publisher.utils.HttpURLConnectionBuilder;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import com.publisher.view.View;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
-import java.io.*;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class WeatherPublisher extends Application {
+public class WeatherPublisher {
     private static String filePropertyPath = "weather-publisher/src/main/resources/com/publisher/config.properties";
-
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(WeatherPublisher.class.getResource("FXMLView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Weather Publisher");
-        stage.setScene(scene);
-        stage.show();
-    }
 
     public static void main(String[] args) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(filePropertyPath);
@@ -70,6 +57,6 @@ public class WeatherPublisher extends Application {
             }
         }, 200, 5000);
 
-        launch();
+        View.launch(View.class, args);
     }
 }
