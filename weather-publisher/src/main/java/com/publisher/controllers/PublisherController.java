@@ -1,11 +1,14 @@
 package com.publisher;
 
 import com.publisher.model.Message;
+import com.publisher.view.PropertyView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.eclipse.paho.client.mqttv3.MqttException;
+
+import java.io.IOException;
 
 public class PublisherController {
     @FXML
@@ -36,6 +39,17 @@ public class PublisherController {
             publisher.disconnect();
         } catch (MqttException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void onClickProperty(ActionEvent event) {
+        PropertyView view = new PropertyView();
+
+        try {
+            view.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
