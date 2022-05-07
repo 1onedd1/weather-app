@@ -44,41 +44,6 @@ public class HttpURLConnectionBuilder {
         return this;
     }
 
-    private boolean isConnectionSuccessful() {
-        try {
-            if(httpURLConnection.getResponseCode() == 200) return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return false;
-    }
-
-    public String ifConnectionSuccessfulGetResponse() {
-        if(!isConnectionSuccessful()) return "";
-
-        String output = "";
-
-        try {
-            InputStream inputStream = httpURLConnection.getInputStream();
-            InputStreamReader streamReader = new InputStreamReader(inputStream);
-            BufferedReader bufferedReader = new BufferedReader(streamReader);
-            StringBuilder stringBuilder = new StringBuilder();
-
-            while ((output = bufferedReader.readLine()) != null) {
-                stringBuilder.append(output);
-            }
-
-            output = stringBuilder.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        httpURLConnection.disconnect();
-
-        return output;
-    }
-
     public HttpURLConnection build() {
         return httpURLConnection;
     }

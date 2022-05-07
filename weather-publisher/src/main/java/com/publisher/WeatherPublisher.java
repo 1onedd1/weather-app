@@ -30,11 +30,20 @@ public class WeatherPublisher {
 
         new Timer().schedule(new TimerTask() {
             public void run() {
-                String response = HttpURLConnectionBuilder.builder()
-                        .setURL(url)
-                        .setMethod("GET")
-                        .setRequestProperty("Accept", "application/json")
-                        .ifConnectionSuccessfulGetResponse();
+                String response = "";
+
+                try {
+                    HttpURLConnection connection = HttpURLConnectionBuilder.builder()
+                            .setURL(url)
+                            .setMethod("GET")
+                            .setRequestProperty("Accept", "application/json").build();
+
+                    HttpURLConnectionService connectionService = new HttpURLConnectionService();
+                    response = connectionService.readResponse(connection);
+                    connection.disconnect();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
 
                 WeatherModel weatherModel = new Gson().fromJson(response, WeatherModel.class);
 
