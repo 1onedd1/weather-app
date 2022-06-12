@@ -12,7 +12,8 @@ public class View extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(WeatherPublisher.class.getResource("FXMLView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 350, 240);
+        stage.setResizable(false);
         stage.setTitle("Weather Publisher");
         stage.setScene(scene);
         stage.show();

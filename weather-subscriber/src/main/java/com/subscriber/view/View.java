@@ -15,6 +15,7 @@ public class View extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Weather Subscriber");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 }
