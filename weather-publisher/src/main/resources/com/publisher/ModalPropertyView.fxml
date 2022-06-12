@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.publisher.controllers.ModalPropertyController"
+      prefHeight="200" prefWidth="300" spacing="10">
+
+    <GridPane>
+        <Label text="City" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="city" focusTraversable="false" GridPane.rowIndex="0" GridPane.columnIndex="1" onInputMethodTextChanged="#onTextFieldChanged"/>
+
+        <Label text="Units" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <ChoiceBox fx:id="units" GridPane.rowIndex="1" GridPane.columnIndex="1" value="standard" onAction="#onCheckBoxChanged">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="standard"/>
+                    <String fx:value="metric"/>
+                    <String fx:value="imperial"/>
+                </FXCollections>
+            </items>
+        </ChoiceBox>
+
+        <Button fx:id="btnApply" text="Apply" onAction="#onClickApply" GridPane.rowIndex="2" GridPane.columnIndex="1" disable="true"/>
+    </GridPane>
+</VBox>

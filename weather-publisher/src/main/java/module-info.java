@@ -6,7 +6,14 @@ module com.example.weatherpublisher {
 
     exports com.publisher;
     exports com.publisher.view;
+    exports com.publisher.model;
 
     opens com.publisher.model to com.google.gson;
     opens com.publisher to javafx.fxml;
+    exports com.publisher.controllers;
+    opens com.publisher.controllers to javafx.fxml;
+    exports com.publisher.service;
+    opens com.publisher.service to javafx.fxml;
+
+
 }

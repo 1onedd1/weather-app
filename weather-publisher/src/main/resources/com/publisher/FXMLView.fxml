@@ -3,14 +3,20 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.publisher.PublisherController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <GridPane>
-        <Label fx:id="lamp" text="false" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-        <Button GridPane.columnIndex="0" GridPane.rowIndex="3" onAction="#onClick" text="Lamp" />
+<VBox spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.publisher.controllers.PublisherController">
+    <MenuBar>
+        <Menu text="Settings">
+            <MenuItem text="Properties" onAction="#onClickProperty"/>
+        </Menu>
+    </MenuBar>
+    <GridPane hgap="10.0">
+        <padding>
+            <Insets left="10.0"/>
+        </padding>
+        <Label text="OpenWeatherMap is connected: " GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="owmConnected" GridPane.rowIndex="0" GridPane.columnIndex="1" editable="false"
+                   focusTraversable="false"/>
+        <ToggleButton fx:id="switchOfLamp" GridPane.columnIndex="0" GridPane.rowIndex="1" onAction="#onClick" text="Lamp Off" />
     </GridPane>
 </VBox>

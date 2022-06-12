@@ -28,7 +28,7 @@ public class WeatherSubscriber {
                 "/weather/pressure/",
                 "/weather/humidity/",
                 "/weather/speedWild/",
-                "/weather/lamp/"
+                "/lamp/"
         };
 
         subscriber.subscribe(topics);

@@ -8,6 +8,17 @@ import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 
 public class HttpURLConnectionService {
+    private static final HttpURLConnectionService httpURLConnectionService;
+    private HttpURLConnectionService() { }
+
+    static {
+        httpURLConnectionService = new HttpURLConnectionService();
+    }
+
+    public static HttpURLConnectionService getInstance() {
+        return httpURLConnectionService;
+    }
+
     public boolean isConnectionSuccessful(HttpURLConnection connection) throws IOException {
         if (connection.getResponseCode() == 200) return true;
 

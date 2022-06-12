@@ -1,55 +1,31 @@
-package com.publisher;
+package com.publisher.controllers;
 
-import com.publisher.model.Message;
+import com.publisher.WeatherPublisher;
 import com.publisher.view.PropertyView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import org.eclipse.paho.client.mqttv3.MqttException;
+import javafx.scene.control.ToggleButton;
 
 import java.io.IOException;
 
 public class PublisherController {
     @FXML
-    private Label temperature;
+    private ToggleButton switchOfLamp;
 
     @FXML
-    private Label pressure;
-
-    @FXML
-    private TextField fPressure;
-
-    @FXML
-    private Label speedWild;
-
-    @FXML
-    private Label lamp;
-
-    private boolean activeLamp;
+    private TextField owmConnected;
 
     @FXML
     public void onClick(ActionEvent event) {
-        try {
-            Publisher publisher = new Publisher("tcp://broker.mqtt-dashboard.com:1883", "client");
-            activeLamp = !activeLamp;
-            Message message = new Message("/weather/lamp/", activeLamp ? "1" : "0", 2);
-            lamp.setText(Boolean.toString(activeLamp));
-            publisher.publish(message.getTopic(), message);
-            publisher.disconnect();
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
+        String strSelected = switchOfLamp.isSelected() ? "Lamp On" : "Lamp Off";
+        switchOfLamp.setText(strSelected);
+        WeatherPublisher.getMessageService().add("/lamp/", strSelected);
     }
 
     @FXML
-    public void onClickProperty(ActionEvent event) {
+    public void onClickProperty(ActionEvent event) throws IOException {
         PropertyView view = new PropertyView();
-
-        try {
-            view.show();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        view.show();
     }
 }
