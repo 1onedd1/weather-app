@@ -11,19 +11,19 @@
 
     <GridPane>
         <Label text="Temperature" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-        <TextField fx:id="fTemperature" text="0" maxWidth="80" editable="false" focusTraversable="false"
+        <TextField fx:id="fTemperature" text="0" maxWidth="80" disable="true"
                    GridPane.columnIndex="1" GridPane.rowIndex="0"/>
         <Label text="Pressure" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-        <TextField fx:id="fPressure" text="0" maxWidth="80" editable="false" focusTraversable="false"
+        <TextField fx:id="fPressure" text="0" maxWidth="80" disable="true"
                    GridPane.columnIndex="1" GridPane.rowIndex="1"/>
         <Label text="Speed Wild" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-        <TextField fx:id="fSpeedWild" text="0" maxWidth="80" editable="false" focusTraversable="false"
+        <TextField fx:id="fSpeedWild" text="0" maxWidth="80" disable="true"
                    GridPane.columnIndex="1" GridPane.rowIndex="2"/>
         <Label text="Humidity" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-        <TextField fx:id="fHumidity" text="0" maxWidth="80" editable="false" focusTraversable="false"
+        <TextField fx:id="fHumidity" text="0" maxWidth="80" disable="true"
                    GridPane.columnIndex="1" GridPane.rowIndex="3"/>
         <Label text="Lamp" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-        <TextField fx:id="fLamp" text="Disabled" maxWidth="80" editable="false" focusTraversable="false"
+        <TextField fx:id="fLamp" text="Disabled" maxWidth="80" disable="true"
                    GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
     </GridPane>
