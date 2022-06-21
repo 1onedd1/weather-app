@@ -20,7 +20,7 @@ public class Publisher extends MqttClient {
     }
 
     public void connect() throws MqttException {
-        connect(mqttConnectOptions);
+        super.connect(mqttConnectOptions);
     }
 
     public void disconnect() throws MqttException {
